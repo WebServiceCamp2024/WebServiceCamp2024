@@ -38,29 +38,29 @@
     }
     .trend-item:last-child
 </style>
- <!-- 오른쪽 섹션 -->
-    <div id="right-section">
-        <!-- 검색 바 -->
-        <div class="search-container">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" class="search-bar" placeholder="트위터 검색">
+<!-- 오른쪽 섹션 -->
+<div id="right-section">
+    <!-- 검색 바 -->
+    <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="search-bar" placeholder="트위터 검색">
+    </div>
+    <!-- 트렌드 목록 -->
+    <div class="trends-list">
+        <h3>나를 위한 트렌드</h3>
+        <!-- 더미 데이터로 구성된 트렌드 목록 -->
+        <div class="trend-item">
+            #트렌드1
+            <i class="fa-solid fa-ellipsis"></i>
         </div>
-        <!-- 트렌드 목록 -->
-        <div class="trends-list">
-            <h3>나를 위한 트렌드</h3>
-            <!-- 더미 데이터로 구성된 트렌드 목록 -->
-            <div class="trend-item">
-                #트렌드1
-                <i class="fa-solid fa-ellipsis"></i>
-            </div>
-            <div class="trend-item">
-                #트렌드2
-                <i class="fa-solid fa-ellipsis"></i>
-            </div>
-            <div class="trend-item">
-                #트렌드3
-                <i class="fa-solid fa-ellipsis"></i>
-            </div>
+        <div class="trend-item">
+            #트렌드2
+            <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <div class="trend-item">
+            #트렌드3
+            <i class="fa-solid fa-ellipsis"></i>
         </div>
     </div>
+</div>
 
