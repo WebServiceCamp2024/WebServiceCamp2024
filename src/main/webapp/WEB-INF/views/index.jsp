@@ -437,7 +437,7 @@
                     <i class="fa-solid fa-calendar-day"></i>
                     <i class="fa-solid fa-location-dot"></i>
                 </div>
-                <button type="button" class="btn btn-primary">Reply</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Reply</button><%-- 모달 창 닫기--%>
             </div>
         </div>
     </div>
