@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>HOME</title>
+    <style>
     <!-- 부트스트랩 CSS 추가 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -21,6 +22,10 @@
         .grid-container > div {
             background-color: white;
             padding: 20px;
+            overflow: auto; /* 섹션 내용이 많을 경우 스크롤을 허용합니다. */
+            border-right: 1px solid #e1e8ed; /* 세로 테두리 추가 */
+            border-bottom: 1px solid #e1e8ed; /* 가로 테두리 추가 */
+        }
             overflow: auto;
             border-right: 1px solid #e1e8ed;
             border-bottom: 1px solid #e1e8ed;
@@ -293,6 +298,7 @@
 </head>
 <body>
 <div class="grid-container">
+  
     <!-- 왼쪽 사이드바 -->
     <%@ include file="sidebar.jsp" %>
 
