@@ -4,7 +4,6 @@
 <html>
 <head>
     <title>HOME</title>
-    <style>
     <!-- 부트스트랩 CSS 추가 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -22,10 +21,6 @@
         .grid-container > div {
             background-color: white;
             padding: 20px;
-            overflow: auto; /* 섹션 내용이 많을 경우 스크롤을 허용합니다. */
-            border-right: 1px solid #e1e8ed; /* 세로 테두리 추가 */
-            border-bottom: 1px solid #e1e8ed; /* 가로 테두리 추가 */
-        }
             overflow: auto;
             border-right: 1px solid #e1e8ed;
             border-bottom: 1px solid #e1e8ed;
@@ -385,9 +380,6 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- 오른쪽 트렌드 -->
     <%@ include file="trend.jsp" %>
 
@@ -478,59 +470,59 @@
         // 여기까지
     });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var toggleButtons = document.querySelectorAll('.toggle-button');
-            var myPostArea = document.querySelector('.my-post-area');
-            var myPostText = document.querySelector('.my-post-text');
-            var postButton = document.querySelector('.post-button');
-            var commentIcons = document.querySelectorAll('.fa-comment-o');
-            commentIcons.forEach(function (icon) {
-                icon.addEventListener('click', function () {
-                    console.log("Comment icon clicked");
-                    openModal(); // 모달 열기 함수 호출
-                });
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleButtons = document.querySelectorAll('.toggle-button');
+        var myPostArea = document.querySelector('.my-post-area');
+        var myPostText = document.querySelector('.my-post-text');
+        var postButton = document.querySelector('.post-button');
+        var commentIcons = document.querySelectorAll('.fa-comment-o');
+        commentIcons.forEach(function (icon) {
+            icon.addEventListener('click', function () {
+                console.log("Comment icon clicked");
+                openModal(); // 모달 열기 함수 호출
             });
-
-
-            toggleButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    toggleButtons.forEach(function (btn) {
-                        btn.classList.remove('active');
-                    });
-                    button.classList.add('active');
-
-                    myPostArea.style.height = myPostArea.scrollHeight + 'px';
-                });
-            });
-
-            myPostArea.style.height = myPostArea.scrollHeight + 'px';
-
-            // Check textarea content on input event
-            myPostText.addEventListener('input', function () {
-                updatePostButtonStyle();
-            });
-
-            updatePostButtonStyle();
-
-            function updatePostButtonStyle() {
-                if (myPostText.value.trim() === '') {
-                    postButton.style.backgroundColor = '#8ec6ff'; // Lighter blue when textarea is empty
-                } else {
-                    postButton.style.backgroundColor = '#1DA1F2'; // Default blue when textarea has content
-                }
-            }
-
-            function openModal() {
-                var modalContainer = document.querySelector('.modal-container');
-                modalContainer.style.display = 'flex'; // 모달 열기
-            }
-
-            // 여기에 모달 닫기 함수 추가
-            function closeModal() {
-                var modalContainer = document.querySelector('.modal-container');
-                modalContainer.style.display = 'none'; // 모달 닫기
-            }
         });
+
+
+        toggleButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                toggleButtons.forEach(function (btn) {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+
+                myPostArea.style.height = myPostArea.scrollHeight + 'px';
+            });
+        });
+
+        myPostArea.style.height = myPostArea.scrollHeight + 'px';
+
+        // Check textarea content on input event
+        myPostText.addEventListener('input', function () {
+            updatePostButtonStyle();
+        });
+
+        updatePostButtonStyle();
+
+        function updatePostButtonStyle() {
+            if (myPostText.value.trim() === '') {
+                postButton.style.backgroundColor = '#8ec6ff'; // Lighter blue when textarea is empty
+            } else {
+                postButton.style.backgroundColor = '#1DA1F2'; // Default blue when textarea has content
+            }
+        }
+
+        function openModal() {
+            var modalContainer = document.querySelector('.modal-container');
+            modalContainer.style.display = 'flex'; // 모달 열기
+        }
+
+        // 여기에 모달 닫기 함수 추가
+        function closeModal() {
+            var modalContainer = document.querySelector('.modal-container');
+            modalContainer.style.display = 'none'; // 모달 닫기
+        }
+    });
 </script>
 
 </body>
