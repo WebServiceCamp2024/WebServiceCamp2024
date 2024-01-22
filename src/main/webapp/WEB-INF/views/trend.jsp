@@ -7,6 +7,11 @@
         display: flex;
         flex-direction: column;
     }
+    @media (max-width: 767px) {
+        #right-section {
+            font-size: 14px;
+        }
+    }
     .search-container {
         display: flex;
         align-items: center;
@@ -39,7 +44,7 @@
     .trend-item:last-child
 </style>
 <!-- 오른쪽 섹션 -->
-<div id="right-section">
+<div id="right-section" class="d-none d-md-block">
     <!-- 검색 바 -->
     <div class="search-container">
         <i class="fa-solid fa-magnifying-glass"></i>
