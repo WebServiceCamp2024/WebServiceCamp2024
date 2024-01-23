@@ -64,10 +64,10 @@
 
 <div id="left-section" class="d-none d-md-block">
     <div>
-        <a href="#" class="menu-item"><i class="fas fa-home"></i>홈</a> <!-- 아이콘 예시 -->
-        <a href="#" class="menu-item"><i class="fas fa-search"></i>탐색하기</a> <!-- 아이콘 예시 -->
+        <a href="/" class="menu-item"><i class="fas fa-home"></i>홈</a> <!-- 아이콘 예시 -->
+        <a href="/search" class="menu-item"><i class="fas fa-search"></i>탐색하기</a> <!-- 아이콘 예시 -->
         <%--            <a href="#" class="menu-item"><i class="fas fa-bell"></i>알림</a> <!-- 아이콘 예시 -->--%>
-        <a href="#" class="menu-item"><i class="fas fa-bookmark"></i>북마크</a> <!-- 아이콘 예시 -->
+        <a href="/book" class="menu-item"><i class="fas fa-bookmark"></i>북마크</a> <!-- 아이콘 예시 -->
         <a href="#" class="menu-item"><i class="fas fa-user"></i>프로필</a> <!-- 아이콘 예시 -->
     </div>
     <!-- 프로필 정보 -->

@@ -14,5 +14,5 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <context:component-scan base-package="org.example.controller"/>
+    <context:component-scan base-package="org.example.controller, org.example.service"/>
 </beans>
