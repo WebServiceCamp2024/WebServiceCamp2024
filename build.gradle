@@ -48,6 +48,12 @@ dependencies {
     // H2 데이터베이스 의존성
     runtimeOnly 'com.h2database:h2:1.4.200'
 
+    // spring dev tools- live reload 기능 사용
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+    implementation 'org.springframework.boot:spring-boot-devtools:3.0.2'
+
+
+
 }
 
 test {
