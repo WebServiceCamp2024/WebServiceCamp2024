@@ -41,41 +41,6 @@
             border-right: 1px solid #e1e8ed;
             border-bottom: 1px solid #e1e8ed;
         }
-        /*@media (max-width: 767px) {*/
-        /*    #left-section, #right-section {*/
-        /*        display: none !important; !* !important를 사용해 우선 순위를 높입니다 *!*/
-        /*    }*/
-        /*    .content-area {*/
-        /*        padding: 0; !* 컨텐츠 영역의 패딩을 제거 *!*/
-        /*        margin: 0 auto; !* 중앙 정렬 *!*/
-        /*        max-width: 100%; !* 최대 너비를 100%로 설정 *!*/
-        /*    }*/
-        /*    .bottom-nav {*/
-        /*        display: flex;*/
-        /*        justify-content: space-around;*/
-        /*        align-items: center;*/
-        /*        position: fixed;*/
-        /*        bottom: 0;*/
-        /*        left: 0;*/
-        /*        right: 0;*/
-        /*        height: 60px;*/
-        /*        background-color: #fff;*/
-        /*        border-top: 1px solid #e1e8ed;*/
-        /*        z-index: 1000;*/
-        /*    }*/
-        /*    !* 바텀 네비게이션의 아이콘과 텍스트 스타일링 *!*/
-        /*    .bottom-nav .menu-item {*/
-        /*        flex-grow: 1;*/
-        /*        text-align: center;*/
-        /*        padding: 10px;*/
-        /*    }*/
-        /*    .bottom-nav .menu-item i {*/
-        /*        font-size: 20px;*/
-        /*    }*/
-        /*    .bottom-nav .menu-item span {*/
-        /*        font-size: 12px;*/
-        /*    }*/
-        /*}*/
         .toggle-buttons-wrapper {
             display: flex;
             justify-content: flex-start;
@@ -398,27 +363,6 @@
     </div>
     <!-- 오른쪽 트렌드 -->
     <%@ include file="trend.jsp" %>
-
-    <%--    <!-- 모바일 뷰를 위한 바텀 네비게이션 -->--%>
-    <%--    <div class="bottom-nav d-md-none">--%>
-    <%--        <!-- 바텀 네비게이션 메뉴 아이템 -->--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-home"></i>--%>
-    <%--            <span>홈</span>--%>
-    <%--        </a>--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-search"></i>--%>
-    <%--            <span>탐색하기</span>--%>
-    <%--        </a>--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-bookmark"></i>--%>
-    <%--            <span>북마크</span>--%>
-    <%--        </a>--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-user"></i>--%>
-    <%--            <span>프로필</span>--%>
-    <%--        </a>--%>
-    <%--    </div>--%>
 </div>
 
 <!-- 모달창 -->
