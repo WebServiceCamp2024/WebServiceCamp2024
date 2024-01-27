@@ -9,7 +9,7 @@
     }
     @media (max-width: 767px) {
         #right-section {
-            font-size: 14px;
+            display: none;
         }
     }
     .search-container {

@@ -16,6 +16,22 @@
             border-right: 1px solid #e1e8ed; /* 세로 테두리 추가 */
             border-bottom: 1px solid #e1e8ed; /* 가로 테두리 추가 */
         }
+        @media (max-width: 767px) {
+            .grid-container{
+                display: grid;
+                grid-template-columns: 4fr 1fr 1fr;
+                gap: 0px;
+                height: 100vh;
+            }
+            .grid-container > div {
+                background-color: blue;
+                padding: 20px;
+                overflow: auto; /* 섹션 내용이 많을 경우 스크롤을 허용합니다. */
+                border-right: none; /* 세로 테두리 추가 */
+                border-bottom: none; /* 가로 테두리 추가 */
+            }
+        }
+
     </style>
 </head>
 <body>
