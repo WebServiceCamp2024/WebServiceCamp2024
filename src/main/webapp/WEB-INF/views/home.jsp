@@ -1,27 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wkdrk
-  Date: 2024-01-23
-  Time: 오후 5:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
-<!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/7f46d2af51.js" crossorigin="anonymous"></script>
+
 <html>
 <head>
     <title>HOME</title>
     <!-- 부트스트랩 CSS 추가 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
         body {
@@ -89,9 +76,8 @@
             display: flex; /* Added to make children align in a row */
             padding-left: 15px;
         }
-
         .my-post-text {
-            width: 80%;
+            width: 100%;
             height: 40%;
             box-sizing: border-box;
             border: none;
@@ -102,11 +88,17 @@
             margin-top: 30px;
         }
 
+        form {
+            margin: 0; /* 폼 마진 제거 */
+            padding: 0; /* 폼 패딩 제거 */
+            width: 100%
+        }
+
         .post-button {
             position: absolute;
             bottom: 8px;
             right: 20px;
-            padding: 9px 17px;
+            padding: 5px 17px;
             background-color: #1DA1F2;
             font-weight: bold;
             color: #ffffff;
@@ -206,7 +198,8 @@
         /*여기까지*/
 
         .post-content {
-            margin: 3px 10px 10px 55px;
+            margin: 3px 15px 10px 55px;
+            padding-left: 11px
         }
 
         .post-image {
@@ -267,8 +260,15 @@
             margin-left: 0;
         }
 
+        .btn-secondary {
+            color: #6c757d;
+            background-color: white;
+            border-color: white;
+        }
 
-
+        .dropdown {
+            margin-left: auto;
+        }
 
     </style>
 </head>
@@ -293,70 +293,49 @@
                         <!-- 추가된 프로필 이미지 -->
                         <img src="resources/img/profile1.jpeg" alt="프로필 이미지" class="profile-pic"/>
 
-                        <textarea class="my-post-text" placeholder="무슨 일이 일어나고 있나요?"></textarea>
-                        <div class="my-post-icons">
-                            <i class="fa-regular fa-images"></i>
-                            <i class="fa-solid fa-video"></i>
-                            <i class="fa-solid fa-bars-progress"></i>
-                            <i class="fa-regular fa-face-smile"></i>
-                            <i class="fa-solid fa-calendar-day"></i>
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
+                        <form action="/post/create" method="post">
+                            <textarea name="content" class="my-post-text" placeholder="무슨 일이 일어나고 있나요?" required></textarea>
+                            <div class="my-post-icons">
+                                <i class="fa-regular fa-images"></i>
+                                <i class="fa-solid fa-video"></i>
+                                <i class="fa-solid fa-bars-progress"></i>
+                                <i class="fa-regular fa-face-smile"></i>
+                                <i class="fa-solid fa-calendar-day"></i>
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
 
-                        <div class="post-button">게시하기</div>
+                            <button type="submit" class="post-button">게시하기</button>
+                        </form>
+
                     </div>
 
-                    <%--여기부터--%>
-                    <!-- 나의 게시글 -->
-                    <div class="post">
-                        <div class="post-header">
-                            <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
-                            <span class="username">@Username</span>
-                            <span class="time">7h</span>
-                            <button class="edit-button" onclick="editPost()">수정</button>
-                            <button class="delete-button" onclick="deletePost()">삭제</button>
+                    <c:forEach var="post" items="${posts}">
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
+                                <span class="username">@Username</span>
+                                <span class="time">7h</span>
+                                <!-- 드롭다운 메뉴 시작 -->
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="javascript:editPost('${post.postId}', '${post.content}');">수정</a></li>
+                                        <li><a class="dropdown-item" href="javascript:showDeleteConfirmation(${post.postId});">삭제</a></li>
+                                    </ul>
+                                </div>
+                                <!-- 드롭다운 메뉴 끝 -->
+                            </div>
+                            <p class="post-content">${post.content}</p>
+                            <div class="post-icons">
+                                <span class="icon"><i class="fa fa-comment-o"></i></span>
+                                <span class="icon"><i class="fa fa-heart-o"></i></span>
+                                <span class="icon"><i class="fa fa-bookmark-o"></i></span>
+                            </div>
                         </div>
-                        <p class="post-content">여기에 작성한 글을 넣으세요.</p>
-                        <img src="resources/img/snow.jpg" alt="Post Image" class="post-image">
-                        <div class="post-icons">
-                            <span class="icon"><i class="fa fa-comment-o"></i></span>
-                            <span class="icon"><i class="fa fa-heart-o"></i></span>
-                            <span class="icon"><i class="fa fa-bookmark-o"></i></span>
-                        </div>
-                    </div>
-                    <%--여기까지--%>
+                    </c:forEach>
 
-                    <!-- 게시글 영역 -->
-                    <div class="post">
-                        <div class="post-header">
-                            <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
-                            <span class="username">@Username</span>
-                            <span class="time">7h</span>
-                        </div>
-                        <p class="post-content">여기에 작성한 글을 넣으세요.</p>
-                        <img src="resources/img/snow.jpg" alt="Post Image" class="post-image">
-                        <div class="post-icons">
-                            <span class="icon"><i class="fa fa-comment-o"></i></span>
-                            <span class="icon"><i class="fa fa-heart-o"></i></span>
-                            <span class="icon"><i class="fa fa-bookmark-o"></i></span>
-                        </div>
-                    </div>
-
-
-                    <!-- 추가 게시글 -->
-                    <div class="post">
-                        <div class="post-header">
-                            <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
-                            <span class="username">@Username2</span>
-                            <span class="time">7h</span>
-                        </div>
-                        <p class="post-content">두 번째 게시글의 내용.</p>
-                        <div class="post-icons">
-                            <span class="icon"><i class="fa fa-comment-o"></i></span>
-                            <span class="icon"><i class="fa fa-heart-o"></i></span>
-                            <span class="icon"><i class="fa fa-bookmark-o"></i></span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -365,7 +344,7 @@
     <%@ include file="trend.jsp" %>
 </div>
 
-<!-- 모달창 -->
+<!-- 댓글 모달창 -->
 <div class="modal" id="commentModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -403,9 +382,98 @@
     </div>
 </div>
 
+<%-- 삭제 모달--%>
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">게시물 삭제</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                이 동작을 수행할 수 없으며 내 프로필, 나를 팔로우하는 계정의 타임라인, 그리고 검색 결과에서 삭제됩니다.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="confirmDelete">삭제하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 수정 모달 -->
+<div class="modal" id="updatePostModal" tabindex="-1" role="dialog" aria-labelledby="updatePostModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updatePostModalLabel">게시물 수정</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 프로필 이미지, 사용자 이름, 시간 -->
+                <div class="post-header">
+                    <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
+                    <span class="username">@Username</span>
+                    <span class="time">7h</span>
+                </div>
+                <!-- 게시물 내용 -->
+                <p class="post-content" id="modalPostContent"></p>
+                <form id="updatePostForm" action="/post/update" method="post">
+                    <input type="hidden" id="updatePostId" name="postId">
+                    <div class="form-group">
+                        <label for="updateContent">수정할 게시물 내용:</label>
+                        <textarea class="form-control" id="updateContent" name="content" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="submit" form="updatePostForm" class="btn btn-primary">수정 완료</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- 부트스트랩 JS 추가 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+
+<%--삭제--%>
+<script>
+    function showDeleteConfirmation(postId) {
+        const confirmDeleteBtn = document.getElementById('confirmDelete');
+        confirmDeleteBtn.onclick = function() {
+            deletePost(postId);
+        };
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+        deleteModal.show();
+    }
+
+    function deletePost(postId) {
+        window.location.href = '/post/delete/' + postId;
+    }
+</script>
+
+
+<script>
+    function editPost(postId, content) {
+        // 모달 내 게시물 정보 업데이트
+        document.getElementById('updatePostId').value = postId;
+        document.getElementById('updateContent').value = content;
+        document.getElementById('modalPostContent').innerText = content;
+
+        // 부트스트랩 모달 표시
+        $('#updatePostModal').modal('show');
+    }
+
+</script>
 
 <script>
     // 댓글 아이콘 클릭 이벤트 리스너 추가
@@ -417,17 +485,6 @@
                 commentModal.show();
             });
         });
-        // 여기부터
-        function editPost() {
-            // Add your logic for handling post editing here
-            alert("Edit button clicked");
-        }
-
-        function deletePost() {
-            // Add your logic for handling post deletion here
-            alert("Delete button clicked");
-        }
-        // 여기까지
     });
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -484,6 +541,5 @@
         }
     });
 </script>
-
 </body>
 </html>
