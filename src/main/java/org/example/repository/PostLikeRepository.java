@@ -10,7 +10,5 @@ import java.util.List;
 @Repository
 public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
 
-
-
     List<PostLike> findAll();
 }

@@ -1,4 +1,3 @@
-// PostLike 도메인
 package org.example.domain;
 
 import lombok.*;
