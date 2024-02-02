@@ -7,6 +7,8 @@ import org.example.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,7 +19,9 @@ public class PostController {
 
     @GetMapping("/")
     public String listPosts(Model model) {
-        model.addAttribute("posts", postService.findAllPosts());
+        List<Post> posts = postService.findAllPosts();
+        Collections.reverse(posts); // 게시글 리스트를 역순으로 정렬/
+        model.addAttribute("posts", posts);
         return "home";
     }
 
@@ -27,11 +31,12 @@ public class PostController {
         return "redirect:/";
     }
 
-    @PostMapping("/post/update")
-    public String updatePost(@ModelAttribute PostRequest postRequest) {
-        postService.updatePost(postRequest);
+    @PostMapping("/post/update/{id}")
+    public String updatePost(@PathVariable Long id, @ModelAttribute PostRequest postRequest) {
+        postService.updatePost(id, postRequest);
         return "redirect:/";
     }
+
 
     @GetMapping("/post/delete/{id}")
     public String deletePost(@PathVariable Long id) {

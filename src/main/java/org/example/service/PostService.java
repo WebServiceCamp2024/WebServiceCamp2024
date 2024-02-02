@@ -29,12 +29,13 @@ public class PostService {
         return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
     }
 
-    public void updatePost(PostRequest postRequest) {
-        Post post = postRepository.findById(postRequest.getPostId())
+    public void updatePost(Long id, PostRequest postRequest) {
+        Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post not found"));
         post.update(postRequest);
         postRepository.save(post);
     }
+
 
     public void deletePost(Long id) {
         postRepository.deleteById(id);

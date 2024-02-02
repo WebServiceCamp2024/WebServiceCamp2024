@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://kit.fontawesome.com/7f46d2af51.js" crossorigin="anonymous"></script>
 
 <html>
@@ -8,7 +9,6 @@
     <title>HOME</title>
     <!-- 부트스트랩 CSS 추가 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
         body {
@@ -314,7 +314,10 @@
                             <div class="post-header">
                                 <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
                                 <span class="username">@Username</span>
-                                <span class="time">7h</span>
+                                <span class="time">
+                                    <fmt:formatDate value="${post.updatedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                </span>
+
                                 <!-- 드롭다운 메뉴 시작 -->
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -409,7 +412,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="updatePostModalLabel">게시물 수정</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </button>
             </div>
             <div class="modal-body">
@@ -430,7 +433,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                 <button type="submit" form="updatePostForm" class="btn btn-primary">수정 완료</button>
             </div>
         </div>
@@ -441,9 +444,6 @@
 
 <!-- 부트스트랩 JS 추가 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-
 
 <%--삭제--%>
 <script>
@@ -469,37 +469,35 @@
         document.getElementById('updateContent').value = content;
         document.getElementById('modalPostContent').innerText = content;
 
-        // 부트스트랩 모달 표시
-        $('#updatePostModal').modal('show');
-    }
+        var form = document.getElementById('updatePostForm');
+        form.action = '/post/update/' + postId;
 
+        var updatePostModal = new bootstrap.Modal(document.getElementById('updatePostModal'));
+        updatePostModal.show();
+    }
 </script>
 
 <script>
-    // 댓글 아이콘 클릭 이벤트 리스너 추가
+    let commentModal; // 모달 인스턴스를 저장할 변수 선언
+
     document.addEventListener('DOMContentLoaded', function () {
         const commentIcons = document.querySelectorAll('.fa-comment-o');
         commentIcons.forEach(icon => {
             icon.addEventListener('click', function () {
-                const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
-                commentModal.show();
+                if (!commentModal) { // commentModal이 초기화되지 않았다면 초기화
+                    commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+                }
+                commentModal.show(); // 모달 보여주기
             });
         });
-    });
 
-    document.addEventListener('DOMContentLoaded', function () {
         var toggleButtons = document.querySelectorAll('.toggle-button');
         var myPostArea = document.querySelector('.my-post-area');
         var myPostText = document.querySelector('.my-post-text');
         var postButton = document.querySelector('.post-button');
-        var commentIcons = document.querySelectorAll('.fa-comment-o');
-        commentIcons.forEach(function (icon) {
-            icon.addEventListener('click', function () {
-                console.log("Comment icon clicked");
-                openModal(); // 모달 열기 함수 호출
-            });
-        });
 
+        // 게시하기 버튼 초기 상태 설정
+        updatePostButtonState();
 
         toggleButtons.forEach(function (button) {
             button.addEventListener('click', function () {
@@ -507,39 +505,25 @@
                     btn.classList.remove('active');
                 });
                 button.classList.add('active');
-
                 myPostArea.style.height = myPostArea.scrollHeight + 'px';
             });
         });
 
         myPostArea.style.height = myPostArea.scrollHeight + 'px';
 
-        // Check textarea content on input event
-        myPostText.addEventListener('input', function () {
-            updatePostButtonStyle();
-        });
+        myPostText.addEventListener('input', updatePostButtonState);
 
-        updatePostButtonStyle();
-
-        function updatePostButtonStyle() {
+        function updatePostButtonState() {
             if (myPostText.value.trim() === '') {
-                postButton.style.backgroundColor = '#8ec6ff'; // Lighter blue when textarea is empty
+                postButton.disabled = true; // 버튼을 비활성화
+                postButton.style.backgroundColor = '#8ec6ff'; // 배경색을 더 밝은 색으로 변경
             } else {
-                postButton.style.backgroundColor = '#1DA1F2'; // Default blue when textarea has content
+                postButton.disabled = false; // 버튼을 활성화
+                postButton.style.backgroundColor = '#1DA1F2'; // 기본 배경색으로 변경
             }
-        }
-
-        function openModal() {
-            var modalContainer = document.querySelector('.modal-container');
-            modalContainer.style.display = 'flex'; // 모달 열기
-        }
-
-        // 여기에 모달 닫기 함수 추가
-        function closeModal() {
-            var modalContainer = document.querySelector('.modal-container');
-            modalContainer.style.display = 'none'; // 모달 닫기
         }
     });
 </script>
+
 </body>
 </html>
