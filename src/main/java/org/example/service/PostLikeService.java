@@ -16,23 +16,20 @@ public class PostLikeService {
 
     private final PostLikeRepository postLikeRepository;
 
-    public void toggleLike(Long postId) {
+    public void likePost(Long postId) {
+
+        System.out.println("LikePost postId: " + postId);
+
         Post post = new Post();
         post.setPostId(postId);
 
-        // 해당 postId에 대한 좋아요 상태 조회
-        PostLike existingPostLike = postLikeRepository.findByPostAndLiked(post, true);
+        PostLike postLike = new PostLike();
+        postLike.setPost(post);
 
-        if (existingPostLike != null) {
-            // 좋아요가 이미 존재하면 취소
-            existingPostLike.setLiked(false);
-            postLikeRepository.save(existingPostLike);
-        } else {
-            // 좋아요가 없으면 추가
-            PostLike newPostLike = new PostLike();
-            newPostLike.setPost(post);
-            newPostLike.setLiked(true);
-            postLikeRepository.save(newPostLike);
-        }
+        postLikeRepository.save(postLike);
+    }
+
+    public void unlikePost(Long postLikeId) {
+        postLikeRepository.deleteById(postLikeId);
     }
 }

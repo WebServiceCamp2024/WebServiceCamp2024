@@ -19,7 +19,4 @@ public class PostLike {
     @ManyToOne
     @JoinColumn(name = "postId")
     private Post post;
-
-    // 추가: 좋아요 상태 (true: 좋아요, false: 좋아요 취소)
-    private boolean liked;
 }
