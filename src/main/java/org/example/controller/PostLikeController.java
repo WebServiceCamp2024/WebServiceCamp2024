@@ -15,20 +15,13 @@ public class PostLikeController {
 
     @PostMapping("/like")
     public String likePost(@ModelAttribute PostLikeRequest postLikeRequest) {
-        postLikeService.likePost(postLikeRequest.getPostId());
+        postLikeService.toggleLike(postLikeRequest.getPostId());
         return "redirect:/";
     }
 
     @PostMapping("/unlike")
-    public String unlikePost(@RequestParam Long postLikeId) {
-        postLikeService.unlikePost(postLikeId);
+    public String unlikePost(@ModelAttribute PostLikeRequest postLikeRequest) {
+        postLikeService.toggleLike(postLikeRequest.getPostId());
         return "redirect:/";
     }
-
-// 해당 게시물의 좋아요 목록 조회
-//    @GetMapping("/post/{postId}/likes")
-//    public String getPostLikes(@PathVariable Long postId, Model model) {
-//        model.addAttribute("likes", postLikeService.getPostLikes(postId));
-//        return "postLikes"; // 좋아요 목록을 보여줄 뷰 이름
-//    }
 }
