@@ -18,8 +18,6 @@ public class BookmarkService {
 
     public void createBookmark(Long postId) {
 
-//        System.out.println("LikePost postId: " + postId);
-//
         Post post = new Post();
         post.setPostId(postId);
 
