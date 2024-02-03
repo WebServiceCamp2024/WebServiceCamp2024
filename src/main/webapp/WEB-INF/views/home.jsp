@@ -60,7 +60,7 @@
             display: block;
             color: #000000;
             position: absolute;
-            left: 133px;
+            left: 135px;
             bottom: 0;
             width: 20%;
             height: 4px;
@@ -270,6 +270,22 @@
             margin-left: auto;
         }
 
+        .like-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 230px;
+        }
+
+        .like-button i {
+            color: #333;
+        }
+
+        .like-button:hover i {
+            color: #1DA1F2;
+        }
+
+
     </style>
 </head>
 <body>
@@ -333,7 +349,12 @@
                             <p class="post-content">${post.content}</p>
                             <div class="post-icons">
                                 <span class="icon"><i class="fa fa-comment-o"></i></span>
-                                <span class="icon"><i class="fa fa-heart-o"></i></span>
+                                <form action="/postlike/like" method="post" class="like-form">
+                                    <input type="hidden" name="postId" value="${post.postId}">
+                                    <button type="submit" class="like-button">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                </form>
                                 <span class="icon"><i class="fa fa-bookmark-o"></i></span>
                             </div>
                         </div>
@@ -523,6 +544,8 @@
             }
         }
     });
+
+
 </script>
 
 </body>
