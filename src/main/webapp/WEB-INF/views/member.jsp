@@ -11,19 +11,36 @@
 <h2>회원 가입 폼</h2>
 
 <!-- action은 백엔드 컨트롤러의 @PostMapping 주소와 일치해야 함 -->
-<form action="/member/create" method="post">
+<form action="/member2/create" method="post">
     <div>
-        <label for="username">사용자 이름:</label>
-        <input type="text" id="username" name="username" required>
+        <label for="email">이메일:</label>
+        <input type="email" id="email" name="email" required>
     </div>
     <div>
-        <label for="password">비밀번호:</label>
-        <input type="password" id="password" name="password" required>
+        <label for="profileImage">프로필 이미지:</label>
+        <input type="text" id="profileImage" name="profileImage" required>
+    </div>
+    <div>
+        <label for="twitterId">트위터 아이디:</label>
+        <input type="text" id="twitterId" name="twitterId" required>
+    </div>
+    <div>
+        <label for="nickname">닉네임:</label>
+        <input type="text" id="nickname" name="nickname" required>
+    </div>
+    <div>
+        <label for="region">지역:</label>
+        <input type="text" id="region" name="region">
+    </div>
+    <div>
+        <label for="info">자기소개:</label>
+        <textarea id="info" name="info"></textarea>
     </div>
     <div>
         <button type="submit">회원 가입</button>
     </div>
 </form>
+
 
 <h2>멤버 리스트</h2>
 <!-- 회원 정보 업데이트 폼, 처음에는 숨겨져 있음 -->
@@ -82,3 +99,6 @@
 
 </body>
 </html>
+
+
+
