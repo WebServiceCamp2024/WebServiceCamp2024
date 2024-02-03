@@ -1,22 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wkdrk
-  Date: 2024-01-23
-  Time: 오후 5:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
-<!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://kit.fontawesome.com/7f46d2af51.js" crossorigin="anonymous"></script>
+
 <html>
 <head>
     <title>HOME</title>
@@ -41,41 +28,6 @@
             border-right: 1px solid #e1e8ed;
             border-bottom: 1px solid #e1e8ed;
         }
-        /*@media (max-width: 767px) {*/
-        /*    #left-section, #right-section {*/
-        /*        display: none !important; !* !important를 사용해 우선 순위를 높입니다 *!*/
-        /*    }*/
-        /*    .content-area {*/
-        /*        padding: 0; !* 컨텐츠 영역의 패딩을 제거 *!*/
-        /*        margin: 0 auto; !* 중앙 정렬 *!*/
-        /*        max-width: 100%; !* 최대 너비를 100%로 설정 *!*/
-        /*    }*/
-        /*    .bottom-nav {*/
-        /*        display: flex;*/
-        /*        justify-content: space-around;*/
-        /*        align-items: center;*/
-        /*        position: fixed;*/
-        /*        bottom: 0;*/
-        /*        left: 0;*/
-        /*        right: 0;*/
-        /*        height: 60px;*/
-        /*        background-color: #fff;*/
-        /*        border-top: 1px solid #e1e8ed;*/
-        /*        z-index: 1000;*/
-        /*    }*/
-        /*    !* 바텀 네비게이션의 아이콘과 텍스트 스타일링 *!*/
-        /*    .bottom-nav .menu-item {*/
-        /*        flex-grow: 1;*/
-        /*        text-align: center;*/
-        /*        padding: 10px;*/
-        /*    }*/
-        /*    .bottom-nav .menu-item i {*/
-        /*        font-size: 20px;*/
-        /*    }*/
-        /*    .bottom-nav .menu-item span {*/
-        /*        font-size: 12px;*/
-        /*    }*/
-        /*}*/
         .toggle-buttons-wrapper {
             display: flex;
             justify-content: flex-start;
@@ -124,9 +76,8 @@
             display: flex; /* Added to make children align in a row */
             padding-left: 15px;
         }
-
         .my-post-text {
-            width: 80%;
+            width: 100%;
             height: 40%;
             box-sizing: border-box;
             border: none;
@@ -137,11 +88,17 @@
             margin-top: 30px;
         }
 
+        form {
+            margin: 0; /* 폼 마진 제거 */
+            padding: 0; /* 폼 패딩 제거 */
+            width: 100%
+        }
+
         .post-button {
             position: absolute;
             bottom: 8px;
             right: 20px;
-            padding: 9px 17px;
+            padding: 5px 17px;
             background-color: #1DA1F2;
             font-weight: bold;
             color: #ffffff;
@@ -241,7 +198,8 @@
         /*여기까지*/
 
         .post-content {
-            margin: 3px 10px 10px 55px;
+            margin: 3px 15px 10px 55px;
+            padding-left: 11px
         }
 
         .post-image {
@@ -302,8 +260,15 @@
             margin-left: 0;
         }
 
+        .btn-secondary {
+            color: #6c757d;
+            background-color: white;
+            border-color: white;
+        }
 
-
+        .dropdown {
+            margin-left: auto;
+        }
 
     </style>
 </head>
@@ -328,100 +293,61 @@
                         <!-- 추가된 프로필 이미지 -->
                         <img src="resources/img/profile1.jpeg" alt="프로필 이미지" class="profile-pic"/>
 
-                        <textarea class="my-post-text" placeholder="무슨 일이 일어나고 있나요?"></textarea>
-                        <div class="my-post-icons">
-                            <i class="fa-regular fa-images"></i>
-                            <i class="fa-solid fa-video"></i>
-                            <i class="fa-solid fa-bars-progress"></i>
-                            <i class="fa-regular fa-face-smile"></i>
-                            <i class="fa-solid fa-calendar-day"></i>
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
+                        <form action="/post/create" method="post">
+                            <textarea name="content" class="my-post-text" placeholder="무슨 일이 일어나고 있나요?" required></textarea>
+                            <div class="my-post-icons">
+                                <i class="fa-regular fa-images"></i>
+                                <i class="fa-solid fa-video"></i>
+                                <i class="fa-solid fa-bars-progress"></i>
+                                <i class="fa-regular fa-face-smile"></i>
+                                <i class="fa-solid fa-calendar-day"></i>
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
 
-                        <div class="post-button">게시하기</div>
+                            <button type="submit" class="post-button">게시하기</button>
+                        </form>
+
                     </div>
 
-                    <%--여기부터--%>
-                    <!-- 나의 게시글 -->
-                    <div class="post">
-                        <div class="post-header">
-                            <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
-                            <span class="username">@Username</span>
-                            <span class="time">7h</span>
-                            <button class="edit-button" onclick="editPost()">수정</button>
-                            <button class="delete-button" onclick="deletePost()">삭제</button>
-                        </div>
-                        <p class="post-content">여기에 작성한 글을 넣으세요.</p>
-                        <img src="resources/img/snow.jpg" alt="Post Image" class="post-image">
-                        <div class="post-icons">
-                            <span class="icon"><i class="fa fa-comment-o"></i></span>
-                            <span class="icon"><i class="fa fa-heart-o"></i></span>
-                            <span class="icon"><i class="fa fa-bookmark-o"></i></span>
-                        </div>
-                    </div>
-                    <%--여기까지--%>
+                    <c:forEach var="post" items="${posts}">
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
+                                <span class="username">@Username</span>
+                                <span class="time">
+                                    <fmt:formatDate value="${post.updatedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                </span>
 
-                    <!-- 게시글 영역 -->
-                    <div class="post">
-                        <div class="post-header">
-                            <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
-                            <span class="username">@Username</span>
-                            <span class="time">7h</span>
+                                <!-- 드롭다운 메뉴 시작 -->
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="javascript:editPost('${post.postId}', '${post.content}');">수정</a></li>
+                                        <li><a class="dropdown-item" href="javascript:showDeleteConfirmation(${post.postId});">삭제</a></li>
+                                    </ul>
+                                </div>
+                                <!-- 드롭다운 메뉴 끝 -->
+                            </div>
+                            <p class="post-content">${post.content}</p>
+                            <div class="post-icons">
+                                <span class="icon"><i class="fa fa-comment-o"></i></span>
+                                <span class="icon"><i class="fa fa-heart-o"></i></span>
+                                <span class="icon"><i class="fa fa-bookmark-o"></i></span>
+                            </div>
                         </div>
-                        <p class="post-content">여기에 작성한 글을 넣으세요.</p>
-                        <img src="resources/img/snow.jpg" alt="Post Image" class="post-image">
-                        <div class="post-icons">
-                            <span class="icon"><i class="fa fa-comment-o"></i></span>
-                            <span class="icon"><i class="fa fa-heart-o"></i></span>
-                            <span class="icon"><i class="fa fa-bookmark-o"></i></span>
-                        </div>
-                    </div>
+                    </c:forEach>
 
-
-                    <!-- 추가 게시글 -->
-                    <div class="post">
-                        <div class="post-header">
-                            <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
-                            <span class="username">@Username2</span>
-                            <span class="time">7h</span>
-                        </div>
-                        <p class="post-content">두 번째 게시글의 내용.</p>
-                        <div class="post-icons">
-                            <span class="icon"><i class="fa fa-comment-o"></i></span>
-                            <span class="icon"><i class="fa fa-heart-o"></i></span>
-                            <span class="icon"><i class="fa fa-bookmark-o"></i></span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- 오른쪽 트렌드 -->
     <%@ include file="trend.jsp" %>
-
-    <%--    <!-- 모바일 뷰를 위한 바텀 네비게이션 -->--%>
-    <%--    <div class="bottom-nav d-md-none">--%>
-    <%--        <!-- 바텀 네비게이션 메뉴 아이템 -->--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-home"></i>--%>
-    <%--            <span>홈</span>--%>
-    <%--        </a>--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-search"></i>--%>
-    <%--            <span>탐색하기</span>--%>
-    <%--        </a>--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-bookmark"></i>--%>
-    <%--            <span>북마크</span>--%>
-    <%--        </a>--%>
-    <%--        <a href="#" class="menu-item">--%>
-    <%--            <i class="fas fa-user"></i>--%>
-    <%--            <span>프로필</span>--%>
-    <%--        </a>--%>
-    <%--    </div>--%>
 </div>
 
-<!-- 모달창 -->
+<!-- 댓글 모달창 -->
 <div class="modal" id="commentModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -459,46 +385,119 @@
     </div>
 </div>
 
+<%-- 삭제 모달--%>
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">게시물 삭제</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                이 동작을 수행할 수 없으며 내 프로필, 나를 팔로우하는 계정의 타임라인, 그리고 검색 결과에서 삭제됩니다.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="confirmDelete">삭제하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 수정 모달 -->
+<div class="modal" id="updatePostModal" tabindex="-1" role="dialog" aria-labelledby="updatePostModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updatePostModalLabel">게시물 수정</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 프로필 이미지, 사용자 이름, 시간 -->
+                <div class="post-header">
+                    <img src="resources/img/profile1.jpeg" alt="Profile Picture" class="profile-pic">
+                    <span class="username">@Username</span>
+                    <span class="time">7h</span>
+                </div>
+                <!-- 게시물 내용 -->
+                <p class="post-content" id="modalPostContent"></p>
+                <form id="updatePostForm" action="/post/update" method="post">
+                    <input type="hidden" id="updatePostId" name="postId">
+                    <div class="form-group">
+                        <label for="updateContent">수정할 게시물 내용:</label>
+                        <textarea class="form-control" id="updateContent" name="content" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="submit" form="updatePostForm" class="btn btn-primary">수정 완료</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- 부트스트랩 JS 추가 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
+<%--삭제--%>
 <script>
-    // 댓글 아이콘 클릭 이벤트 리스너 추가
+    function showDeleteConfirmation(postId) {
+        const confirmDeleteBtn = document.getElementById('confirmDelete');
+        confirmDeleteBtn.onclick = function() {
+            deletePost(postId);
+        };
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+        deleteModal.show();
+    }
+
+    function deletePost(postId) {
+        window.location.href = '/post/delete/' + postId;
+    }
+</script>
+
+
+<script>
+    function editPost(postId, content) {
+        // 모달 내 게시물 정보 업데이트
+        document.getElementById('updatePostId').value = postId;
+        document.getElementById('updateContent').value = content;
+        document.getElementById('modalPostContent').innerText = content;
+
+        var form = document.getElementById('updatePostForm');
+        form.action = '/post/update/' + postId;
+
+        var updatePostModal = new bootstrap.Modal(document.getElementById('updatePostModal'));
+        updatePostModal.show();
+    }
+</script>
+
+<script>
+    let commentModal; // 모달 인스턴스를 저장할 변수 선언
+
     document.addEventListener('DOMContentLoaded', function () {
         const commentIcons = document.querySelectorAll('.fa-comment-o');
         commentIcons.forEach(icon => {
             icon.addEventListener('click', function () {
-                const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
-                commentModal.show();
+                if (!commentModal) { // commentModal이 초기화되지 않았다면 초기화
+                    commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+                }
+                commentModal.show(); // 모달 보여주기
             });
         });
-        // 여기부터
-        function editPost() {
-            // Add your logic for handling post editing here
-            alert("Edit button clicked");
-        }
 
-        function deletePost() {
-            // Add your logic for handling post deletion here
-            alert("Delete button clicked");
-        }
-        // 여기까지
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
         var toggleButtons = document.querySelectorAll('.toggle-button');
         var myPostArea = document.querySelector('.my-post-area');
         var myPostText = document.querySelector('.my-post-text');
         var postButton = document.querySelector('.post-button');
-        var commentIcons = document.querySelectorAll('.fa-comment-o');
-        commentIcons.forEach(function (icon) {
-            icon.addEventListener('click', function () {
-                console.log("Comment icon clicked");
-                openModal(); // 모달 열기 함수 호출
-            });
-        });
 
+        // 게시하기 버튼 초기 상태 설정
+        updatePostButtonState();
 
         toggleButtons.forEach(function (button) {
             button.addEventListener('click', function () {
@@ -506,37 +505,22 @@
                     btn.classList.remove('active');
                 });
                 button.classList.add('active');
-
                 myPostArea.style.height = myPostArea.scrollHeight + 'px';
             });
         });
 
         myPostArea.style.height = myPostArea.scrollHeight + 'px';
 
-        // Check textarea content on input event
-        myPostText.addEventListener('input', function () {
-            updatePostButtonStyle();
-        });
+        myPostText.addEventListener('input', updatePostButtonState);
 
-        updatePostButtonStyle();
-
-        function updatePostButtonStyle() {
+        function updatePostButtonState() {
             if (myPostText.value.trim() === '') {
-                postButton.style.backgroundColor = '#8ec6ff'; // Lighter blue when textarea is empty
+                postButton.disabled = true; // 버튼을 비활성화
+                postButton.style.backgroundColor = '#8ec6ff'; // 배경색을 더 밝은 색으로 변경
             } else {
-                postButton.style.backgroundColor = '#1DA1F2'; // Default blue when textarea has content
+                postButton.disabled = false; // 버튼을 활성화
+                postButton.style.backgroundColor = '#1DA1F2'; // 기본 배경색으로 변경
             }
-        }
-
-        function openModal() {
-            var modalContainer = document.querySelector('.modal-container');
-            modalContainer.style.display = 'flex'; // 모달 열기
-        }
-
-        // 여기에 모달 닫기 함수 추가
-        function closeModal() {
-            var modalContainer = document.querySelector('.modal-container');
-            modalContainer.style.display = 'none'; // 모달 닫기
         }
     });
 </script>

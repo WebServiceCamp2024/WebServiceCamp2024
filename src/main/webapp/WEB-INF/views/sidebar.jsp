@@ -3,6 +3,12 @@
 
 <title>Twitter Clone Layout</title>
 <style>
+    @media (max-width: 767px) {
+        #left-section {
+            display: none;
+            padding-left: 0px;
+        }
+    }
     #left-section {
         border-left: none;
         padding-left: 80px; /* 왼쪽 섹션의 왼쪽 패딩을 늘립니다. */
@@ -10,11 +16,7 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    @media (max-width: 767px) {
-        #left-section {
-            font-size: 14px;
-        }
-    }
+
     .profile-section {
         margin-top: auto; /* 자동 마진으로 아래쪽에 배치 */
     }
@@ -69,6 +71,7 @@
         <%--            <a href="#" class="menu-item"><i class="fas fa-bell"></i>알림</a> <!-- 아이콘 예시 -->--%>
         <a href="/book" class="menu-item"><i class="fas fa-bookmark"></i>북마크</a> <!-- 아이콘 예시 -->
         <a href="#" class="menu-item"><i class="fas fa-user"></i>프로필</a> <!-- 아이콘 예시 -->
+        <a href="/member" class="menu-item"><i class="fas fa-menu"></i>멤버 (예시)</a> <!-- 아이콘 예시 -->
     </div>
     <!-- 프로필 정보 -->
     <div class="profile-section">

@@ -44,9 +44,11 @@ dependencies {
 //    implementation 'org.springframework.data:spring-data-jpa:2.4.10'
     implementation 'org.springframework.data:spring-data-jpa:2.0.7.RELEASE'
 
+    implementation 'javax.servlet:jstl:1.2'
 
     // H2 데이터베이스 의존성
-    runtimeOnly 'com.h2database:h2:1.4.200'
+//    runtimeOnly 'com.h2database:h2:1.4.200'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
 
     // spring dev tools- live reload 기능 사용
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
