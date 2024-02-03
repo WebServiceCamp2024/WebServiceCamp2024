@@ -70,7 +70,7 @@
         <a href="/search" class="menu-item"><i class="fas fa-search"></i>탐색하기</a> <!-- 아이콘 예시 -->
         <%--            <a href="#" class="menu-item"><i class="fas fa-bell"></i>알림</a> <!-- 아이콘 예시 -->--%>
         <a href="/book" class="menu-item"><i class="fas fa-bookmark"></i>북마크</a> <!-- 아이콘 예시 -->
-        <a href="#" class="menu-item"><i class="fas fa-user"></i>프로필</a> <!-- 아이콘 예시 -->
+        <a href="/profile" class="menu-item"><i class="fas fa-user"></i>프로필</a> <!-- 아이콘 예시 -->
         <a href="/member" class="menu-item"><i class="fas fa-menu"></i>멤버 (예시)</a> <!-- 아이콘 예시 -->
     </div>
     <!-- 프로필 정보 -->
