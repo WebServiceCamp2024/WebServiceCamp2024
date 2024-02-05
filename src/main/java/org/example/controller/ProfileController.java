@@ -9,4 +9,9 @@ public class ProfileController {
     public String profile() {
         return "profile";
     }
+
+    @RequestMapping("/settings/profile")
+    public String editProfile(){
+        return "/settings/profile";
+    }
 }
