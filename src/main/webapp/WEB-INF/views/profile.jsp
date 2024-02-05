@@ -74,11 +74,11 @@
             margin: 0 0 32px;
         }
 
-        /***************  Modal  *********************/
+        /******************  Modal  *********************/
         .modal-body{
             padding: 0 2px 64px 2px;
             /* modal 내부 크기 지정 */
-            max-height: calc( 100vh - 500px);
+            max-height: calc( 100vh - 100px);
             overflow-y: auto;
         }
 
@@ -92,6 +92,11 @@
             margin-bottom: 10px;
         }
 
+        #input-file, #input-profileFile{
+            /* DOM에서 요소를 완전 제거 */
+            display: none;
+        }
+
         .modal-background{
             height: 200px;
             background-color: #BBBBBB;
@@ -100,12 +105,16 @@
             align-items: center;
         }
 
-        .modal-background > i{
+        .modal-background > button{
+            border: 0;
+            background-color: transparent;
+        }
+
+        .modal-background > button > i{
             padding: 14px;
             border-radius: 24px;
             color: white;
             background-color: #636466;
-
         }
 
         .modal-profile{
@@ -264,17 +273,18 @@
                             </div>
                             <div class="modal-body">
                                 <div class="modal-background">
-                                    <i class="fa-solid fa-camera"></i>
+                                    <input type="file" id="input-file"/>
+                                    <button onclick="onClickUpload();"><i class="fa-solid fa-camera"></i></button>
                                 </div>
 
                                 <div class="modal-profile">
                                     <div class="image-wrapper position-relative">
                                         <img src="/resources/img/profile1.jpeg" alt="default">
                                         <div class="camera-wrapper position-absolute top-50 start-50 translate-middle">
+                                            <input type="file" id="input-profileFile"/>
                                             <i class="fa-solid fa-camera"></i>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <div class="modal-name">
@@ -384,6 +394,12 @@
             }
         });
     });
+
+    // file upload 모양 커스텀
+    function onClickUpload(){
+        let inputFile = document.getElementById("input-file");
+        inputFile.click();
+    }
 
     document.addEventListener("DOMContentLoaded", function() {
         var followNumElement = document.querySelector('.follow-num');
