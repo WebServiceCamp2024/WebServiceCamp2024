@@ -4,32 +4,33 @@ import lombok.RequiredArgsConstructor;
 import org.example.domain.Post;
 import org.example.domain.PostLike;
 import org.example.repository.PostLikeRepository;
+import org.example.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class PostLikeService {
 
     private final PostLikeRepository postLikeRepository;
+    private final PostRepository postRepository;
 
-    public void likePost(Long postId) {
+    @Transactional
+    public void toggleLike(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new EntityNotFoundException("Post with id " + postId + " not found"));
 
-        System.out.println("LikePost postId: " + postId);
+        Optional<PostLike> existingLike = postLikeRepository.findByPost(post);
 
-        Post post = new Post();
-        post.setPostId(postId);
-
-        PostLike postLike = new PostLike();
-        postLike.setPost(post);
-
-        postLikeRepository.save(postLike);
-    }
-
-    public void unlikePost(Long postLikeId) {
-        postLikeRepository.deleteById(postLikeId);
+        if (existingLike.isPresent()) {
+            postLikeRepository.delete(existingLike.get());
+        } else {
+            PostLike postLike = new PostLike();
+            postLike.setPost(post);
+            postLikeRepository.save(postLike);
+        }
     }
 }

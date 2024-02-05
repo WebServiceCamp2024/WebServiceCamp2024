@@ -111,6 +111,14 @@
             background-color: #8ec6ff; /* Lighter blue when textarea is empty */
         }
 
+        .post-icons .icon.like-button {
+            margin-left: 55px;
+        }
+
+        .post-icons .icon.bookmark-button {
+            margin-left: 70px;
+        }
+
         .my-post-icons {
             position: absolute;
             bottom: 18px;
@@ -349,13 +357,16 @@
                             <p class="post-content">${post.content}</p>
                             <div class="post-icons">
                                 <span class="icon"><i class="fa fa-comment-o"></i></span>
-                                <form action="/postlike/like" method="post" class="like-form">
-                                    <input type="hidden" name="postId" value="${post.postId}">
-                                    <button type="submit" class="like-button">
-                                        <i class="fa fa-heart-o"></i>
-                                    </button>
-                                </form>
-                                <span class="icon"><i class="fa fa-bookmark-o"></i></span>
+
+                                <span class="icon like-button" data-post-id="${post.postId}">
+                                    <i class="fa fa-heart-o"></i>
+                                </span>
+
+                                <span class="icon bookmark-button" data-post-id="${post.postId}">
+                                    <i class="fa fa-bookmark-o"></i>
+                                </span>
+
+
                             </div>
                         </div>
                     </c:forEach>
@@ -547,6 +558,87 @@
 
 
 </script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const likeButtons = document.querySelectorAll('.like-button');
+
+        likeButtons.forEach(button => {
+            button.addEventListener('click', async function (event) {
+                event.preventDefault();
+                await toggleLikeIcon(button, 'fa-heart-o', 'fa-heart');
+            });
+        });
+
+        async function toggleLikeIcon(button, initialClass, toggledClass) {
+            const postId = button.dataset.postId;
+
+            try {
+                const response = await fetch('/postlike/toggle/' + postId, {
+                    method: 'POST',
+                });
+
+                if (response.ok) {
+                    const icon = button.querySelector('i');
+                    if (icon.classList.contains(initialClass)) {
+                        icon.classList.remove(initialClass);
+                        icon.classList.add(toggledClass);
+                    } else {
+                        icon.classList.remove(toggledClass);
+                        icon.classList.add(initialClass);
+                    }
+                } else {
+                    console.error('Server error');
+                }
+            } catch (error) {
+                console.error('Error during AJAX request', error);
+            }
+        }
+    });
+
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const bookmarkButtons = document.querySelectorAll('.bookmark-button');
+
+        bookmarkButtons.forEach(button => {
+            button.addEventListener('click', async function (event) {
+                event.preventDefault();
+                await toggleLikeIcon(button, 'fa-bookmark-o', 'fa-bookmark');
+            });
+        });
+
+        async function toggleLikeIcon(button, initialClass, toggledClass) {
+            const postId = button.dataset.postId;
+
+            try {
+                const response = await fetch('/bookmark/toggle/' + postId, {
+                    method: 'POST',
+                });
+
+                if (response.ok) {
+                    const bookmarkIcon = button.querySelector('i');
+                    if (bookmarkIcon.classList.contains(initialClass)) {
+                        bookmarkIcon.classList.remove(initialClass);
+                        bookmarkIcon.classList.add(toggledClass);
+                    } else {
+                        bookmarkIcon.classList.remove(toggledClass);
+                        bookmarkIcon.classList.add(initialClass);
+                    }
+                } else {
+                    console.error('Server error');
+                }
+            } catch (error) {
+                console.error('Error during AJAX request', error);
+            }
+        }
+    });
+
+</script>
+
 
 </body>
 </html>

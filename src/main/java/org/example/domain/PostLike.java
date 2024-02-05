@@ -10,6 +10,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "post") //StackOverflowError 방지
+@ToString(exclude = "post") //StackOverflowError 방지
 public class PostLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +21,6 @@ public class PostLike {
     @ManyToOne
     @JoinColumn(name = "postId")
     private Post post;
+
+
 }
