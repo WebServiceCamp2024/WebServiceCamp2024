@@ -50,6 +50,8 @@ dependencies {
 //    runtimeOnly 'com.h2database:h2:1.4.200'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
 
+
+
 }
 
 test {
