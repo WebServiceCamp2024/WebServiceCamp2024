@@ -26,6 +26,16 @@
             padding: 0 16px;
         }
 
+        .profile-back a{
+            color: black;
+            text-decoration: none;
+            outline: none;
+        }
+
+        .profile-back a:hover, .profile-back a:active{
+            text-decoration: none;
+        }
+
         .profile-bg{
             height: 200px;
             background-color: #CFD9DE;
@@ -218,8 +228,8 @@
     <div class="profile">
         <div class="profile-header sticky-top">
             <div class="d-flex align-items-center">
-                <div class="pe-5">
-                    <i class="fa-solid fa-arrow-left"></i>
+                <div class="pe-5 profile-back">
+                    <a href="/home"><i class="fa-solid fa-arrow-left"></i></a>
                 </div>
 
                 <div class="d-flex flex-column">
@@ -246,7 +256,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div>
-                                    <span class="modal-title fs-5 fw-bold" id="exampleModalLabel">프로필 수정</span>
+                                    <span class="modal-title fs-5 fw-bold" id="exampleModalLabel" >프로필 수정</span>
                                 </div>
                                 <div class="ms-auto">
                                     <button type="button" class="btn btn-dark px-3 rounded-pill fw-bold">저장</button>
