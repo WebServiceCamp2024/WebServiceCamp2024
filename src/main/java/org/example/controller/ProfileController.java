@@ -14,4 +14,9 @@ public class ProfileController {
     public String editProfile(){
         return "/settings/profile";
     }
+//  현재 멤버 아이디 값이 오면
+    @RequestMapping("/my/following")
+    public String moveFollowing(){
+        return "/following";
+    }
 }

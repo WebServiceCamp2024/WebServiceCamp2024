@@ -326,13 +326,12 @@
                     <span>가입일: 2024년 1월</span>
                 </div>
                 <div class="profile-follow">
-                    <span class="fw-bold">2</span>
+                    <span class="follow-num fw-bold">2</span>
                     <span class="me-3">팔로우 중</span>
-                    <span class="fw-bold">1</span>
+                    <span class="follower-num fw-bold">1</span>
                     <span>팔로워</span>
                 </div>
             </div>
-
 
 
         <div class="profile-content">
@@ -356,7 +355,7 @@
                 </div>
             </nav>
 
-            <div class="profile-status">
+            <div class="profile-post">
                 
             </div>
         </div>
@@ -383,6 +382,14 @@
             } else {
                 $field.removeClass('field--not-empty');
             }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var followNumElement = document.querySelector('.follow-num');
+        // 함수 인자로 현재 멤버를 id를 보내야함
+        followNumElement.addEventListener('click', function() {
+            window.location.href = 'my/following';
         });
     });
 </script>
