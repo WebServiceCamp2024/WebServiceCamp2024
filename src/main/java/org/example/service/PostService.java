@@ -2,6 +2,7 @@ package org.example.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.domain.Member2;
+import org.example.domain.Bookmark;
 import org.example.domain.Post;
 import org.example.dto.request.PostRequest;
 import org.example.repository.Member2Repository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +45,14 @@ public class PostService {
 
     public void deletePost(Long id) {
         postRepository.deleteById(id);
+    }
+
+    // 북마크된 게시물만 가져옴.
+    public List<Post> getPostsByBookmarks(List<Bookmark> bookmarks) {
+        List<Long> bookmarkedPostIds = bookmarks.stream()
+                .map(Bookmark::getPost)
+                .map(Post::getPostId)
+                .collect(Collectors.toList());
+        return postRepository.findAllById(bookmarkedPostIds);
     }
 }

@@ -335,9 +335,7 @@
                             <input type="text" name="memberId" class="my-post-member-id" placeholder="멤버 아이디" required>
                             <button type="submit" class="post-button">게시하기</button>
                         </form>
-
                     </div>
-
                     <c:forEach var="post" items="${posts}">
                         <div class="post">
                             <div class="post-header">
@@ -370,8 +368,6 @@
                                 <span class="icon bookmark-button" data-post-id="${post.postId}">
                                     <i class="fa fa-bookmark-o"></i>
                                 </span>
-
-
                             </div>
                         </div>
                     </c:forEach>
@@ -441,7 +437,6 @@
     </div>
 </div>
 
-
 <!-- 수정 모달 -->
 <div class="modal" id="updatePostModal" tabindex="-1" role="dialog" aria-labelledby="updatePostModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -477,8 +472,6 @@
     </div>
 </div>
 
-
-
 <!-- 부트스트랩 JS 추가 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
@@ -497,7 +490,6 @@
         window.location.href = '/post/delete/' + postId;
     }
 </script>
-
 
 <script>
     function editPost(postId, content) {
@@ -545,11 +537,8 @@
                 myPostArea.style.height = myPostArea.scrollHeight + 'px';
             });
         });
-
         myPostArea.style.height = myPostArea.scrollHeight + 'px';
-
         myPostText.addEventListener('input', updatePostButtonState);
-
         function updatePostButtonState() {
             if (myPostText.value.trim() === '') {
                 postButton.disabled = true; // 버튼을 비활성화
@@ -560,12 +549,8 @@
             }
         }
     });
-
-
 </script>
-
 <script>
-
     document.addEventListener('DOMContentLoaded', function () {
         const likeButtons = document.querySelectorAll('.like-button');
 
@@ -575,10 +560,8 @@
                 await toggleLikeIcon(button, 'fa-heart-o', 'fa-heart');
             });
         });
-
         async function toggleLikeIcon(button, initialClass, toggledClass) {
             const postId = button.dataset.postId;
-
             try {
                 const response = await fetch('/postlike/toggle/' + postId, {
                     method: 'POST',
@@ -589,9 +572,11 @@
                     if (icon.classList.contains(initialClass)) {
                         icon.classList.remove(initialClass);
                         icon.classList.add(toggledClass);
+                        icon.style.color = '#ff0000';
                     } else {
                         icon.classList.remove(toggledClass);
                         icon.classList.add(initialClass);
+                        icon.style.color = '#333';
                     }
                 } else {
                     console.error('Server error');
@@ -601,48 +586,44 @@
             }
         }
     });
-
 </script>
-
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const bookmarkButtons = document.querySelectorAll('.bookmark-button');
-
-        bookmarkButtons.forEach(button => {
-            button.addEventListener('click', async function (event) {
-                event.preventDefault();
-                await toggleLikeIcon(button, 'fa-bookmark-o', 'fa-bookmark');
-            });
+    document.querySelectorAll('.bookmark-button').forEach(button => {
+        button.addEventListener('click', async function(event) {
+            event.preventDefault();
+            await toggleBookmarkIcon(button, 'fa-bookmark-o', 'fa-bookmark');
         });
-
-        async function toggleLikeIcon(button, initialClass, toggledClass) {
-            const postId = button.dataset.postId;
-
-            try {
-                const response = await fetch('/bookmark/toggle/' + postId, {
-                    method: 'POST',
-                });
-
-                if (response.ok) {
-                    const bookmarkIcon = button.querySelector('i');
-                    if (bookmarkIcon.classList.contains(initialClass)) {
-                        bookmarkIcon.classList.remove(initialClass);
-                        bookmarkIcon.classList.add(toggledClass);
-                    } else {
-                        bookmarkIcon.classList.remove(toggledClass);
-                        bookmarkIcon.classList.add(initialClass);
-                    }
-                } else {
-                    console.error('Server error');
-                }
-            } catch (error) {
-                console.error('Error during AJAX request', error);
-            }
-        }
     });
 
+    async function toggleBookmarkIcon(button, initialClass, toggledClass) {
+        const postId = button.dataset.postId;
+
+        try {
+            const response = await fetch('/bookmark/toggle/' + postId, {
+                method: 'POST',
+            });
+
+            if (response.ok) {
+                const bookmarkIcon = button.querySelector('i');
+                if (bookmarkIcon.classList.contains(initialClass)) {
+                    bookmarkIcon.classList.remove(initialClass);
+                    bookmarkIcon.classList.add(toggledClass);
+                    bookmarkIcon.style.color = '#009dff';
+                } else {
+                    bookmarkIcon.classList.remove(toggledClass);
+                    bookmarkIcon.classList.add(initialClass);
+                    bookmarkIcon.style.color = '#333';
+                }
+            } else {
+                console.error('서버 오류');
+            }
+        } catch (error) {
+            console.error('AJAX 요청 중 오류 발생', error);
+        }
+    }
 </script>
+
 
 
 </body>

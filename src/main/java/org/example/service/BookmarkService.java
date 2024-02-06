@@ -33,10 +33,10 @@ public class BookmarkService {
             bookmark.setPost(post);
             bookmarkRepository.save(bookmark);
         }
-        updateBookmarks();
     }
 
     public List<Bookmark> getAllBookmarks() {
+
         return bookmarkRepository.findAll();
     }
 

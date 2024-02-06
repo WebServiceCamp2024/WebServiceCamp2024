@@ -28,5 +28,4 @@ public class BookmarkController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
         }
     }
-
 }
