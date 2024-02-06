@@ -19,6 +19,11 @@ public class Post {
     @Column(name = "postId")
     private Long postId;
 
+    //멤버와 관계
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId")
+    private Member2 member;
+
     private String content;
     private int postLikeCount = 0; // 초기값 0
     private int view = 0; // 초기값 0

@@ -285,6 +285,11 @@
             color: #1DA1F2;
         }
 
+        .my-post-member-id{
+            margin-left: 330px;
+            width: 100px;
+            margin-top: 14px;
+        }
 
     </style>
 </head>
@@ -319,7 +324,7 @@
                                 <i class="fa-solid fa-calendar-day"></i>
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
-
+                            <input type="text" name="memberId" class="my-post-member-id" placeholder="멤버 아이디" required>
                             <button type="submit" class="post-button">게시하기</button>
                         </form>
 
