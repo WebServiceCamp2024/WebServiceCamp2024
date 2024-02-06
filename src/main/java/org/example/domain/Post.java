@@ -4,7 +4,9 @@ import lombok.*;
 import org.example.dto.request.PostRequest;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -50,4 +52,15 @@ public class Post {
     public void update(PostRequest request) {
         this.content = request.getContent();
     }
+
+    //    PostLike entity와 연결
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
+    private List<PostLike> postLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
+    private List<Bookmark> bookmarks = new ArrayList<>();
+
+
 }
