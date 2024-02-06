@@ -3,8 +3,12 @@ package org.example.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.request.PostLikeRequest;
 import org.example.service.PostLikeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityNotFoundException;
 
 @Controller
 @RequiredArgsConstructor
@@ -13,22 +17,13 @@ public class PostLikeController {
 
     private final PostLikeService postLikeService;
 
-    @PostMapping("/like")
-    public String likePost(@ModelAttribute PostLikeRequest postLikeRequest) {
-        postLikeService.likePost(postLikeRequest.getPostId());
-        return "redirect:/";
+    @PostMapping("/toggle/{postId}")
+    public ResponseEntity<String> toggleLike(@PathVariable Long postId) {
+        try {
+            postLikeService.toggleLike(postId);
+            return ResponseEntity.ok("Success");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+        }
     }
-
-    @PostMapping("/unlike")
-    public String unlikePost(@RequestParam Long postLikeId) {
-        postLikeService.unlikePost(postLikeId);
-        return "redirect:/";
-    }
-
-// 해당 게시물의 좋아요 목록 조회
-//    @GetMapping("/post/{postId}/likes")
-//    public String getPostLikes(@PathVariable Long postId, Model model) {
-//        model.addAttribute("likes", postLikeService.getPostLikes(postId));
-//        return "postLikes"; // 좋아요 목록을 보여줄 뷰 이름
-//    }
 }

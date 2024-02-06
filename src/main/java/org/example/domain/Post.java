@@ -53,7 +53,7 @@ public class Post {
         this.content = request.getContent();
     }
 
-    // PostLike entity와 연결
+//    PostLike entity와 연결
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<PostLike> postLikes = new ArrayList<>();
@@ -61,5 +61,4 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<Bookmark> bookmarks = new ArrayList<>();
-
 }
