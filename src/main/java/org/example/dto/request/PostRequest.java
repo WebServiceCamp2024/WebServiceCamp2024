@@ -6,4 +6,5 @@ import lombok.Data;
 public class PostRequest {
     private Long postId;
     private String content;
+    private Long memberId;
 }

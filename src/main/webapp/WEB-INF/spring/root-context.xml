@@ -49,7 +49,6 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-
     <!-- JPA 트랜잭션 설정을 활성화 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
