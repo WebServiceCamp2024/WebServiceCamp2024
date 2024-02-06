@@ -61,4 +61,5 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<Bookmark> bookmarks = new ArrayList<>();
+
 }
