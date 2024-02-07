@@ -54,11 +54,11 @@ public class Post {
     }
 
 //    PostLike entity와 연결
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post",orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<PostLike> postLikes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<Bookmark> bookmarks = new ArrayList<>();
 }
